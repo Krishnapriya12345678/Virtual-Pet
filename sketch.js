@@ -5,7 +5,7 @@
 
 
  var dog,dogImage,happy,database,FoodStock,FoodS
-var food=20
+var FoodS=20
 function preload()
 {
 
@@ -41,15 +41,16 @@ background(dogHouseImage)
   
 
 if(keyWentDown(UP_ARROW)){
+  
+  dog.addImage("dog",dogImage1)
+  
+  if(FoodS<0){
+    FoodS=0
+  }else{
+    FoodS=FoodS-1
+  }
   writeStock(FoodS)
 
-  dog.addImage("dog",dogImage1)
-  food=food-1
-  if(food<0){
-    food=0
-  }else{
-    food=food-1
-  }
   milk.addImage("white",milkImage)
   
   }else{
@@ -61,7 +62,7 @@ if(keyWentDown(UP_ARROW)){
   text("FEED CHEESECAKE BY CLICKING UP_ARROW",50,40)
 textSize(20)
   fill('black')
-  text("MILK  :  "  +food,200,100)
+  text("MILK  :  "  +FoodS,200,100)
 
  
   
@@ -76,11 +77,6 @@ FoodS=data.val()
 }
 function writeStock(x){
 
-  if(x<0){
-    x=0
-  }else{
-    x=x-1
-  }
   database.ref('/').update({
     Food:x
   })
